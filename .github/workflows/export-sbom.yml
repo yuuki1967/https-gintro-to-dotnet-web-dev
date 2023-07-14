@@ -1,0 +1,27 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Export GitHub SBOM
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  export_sbom_job:
+    runs-on: ubuntu-latest
+    environment: DEV
+    steps:
+      - name: "Get Repo"
+        run: |
+           curl -L \
+                 -H 'Accept: application/vnd.github+json' \
+                 -H  'Authorization: Bearer ${{secrets.GITHUB_TOKEN}}' \
+                 "https://api.github.com/orgs/${{ github.repository }}/dependency-graph/sbom"       
