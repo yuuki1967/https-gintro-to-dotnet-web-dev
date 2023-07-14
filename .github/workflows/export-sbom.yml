@@ -24,4 +24,4 @@ jobs:
            curl -L \
                  -H 'Accept: application/vnd.github+json' \
                  -H  'Authorization: Bearer ${{secrets.GITHUB_TOKEN}}' \
-                 "https://api.github.com/orgs/${{ github.repository }}/dependency-graph/sbom"       
+                 "https://api.github.com/repos/${{ github.repository }}/dependency-graph/sbom"       
